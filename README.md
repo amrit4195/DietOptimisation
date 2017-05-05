@@ -3,7 +3,7 @@ SIT302 - Project Delivery
 
 # Team Members 
 
-Amritpal Singh 
-Nam Do 
-Jia Miao
+Amritpal Singh \n 
+Nam Do \n 
+Jia Miao \n 
 Cooper Xia 
