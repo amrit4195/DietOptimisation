@@ -4,13 +4,13 @@
 SOURCE: https://www-01.ibm.com/support/docview.wss?uid=swg27039535&aid=1
 SOURCE: https://www-01.ibm.com/support/docview.wss?uid=swg21569279
 
-##### Initiating Connection 
+#### Initiating Connection 
 
 DBConnection db("oracle12","username/password@SSID")
 
 // SSID is Deakin's DB Instance 
 
-##### Reading from DB 
+#### Reading from DB 
 
 food from DBRead(db,"SELECT
 foodname FROM food");
@@ -30,9 +30,9 @@ omega FROM food");
 satfat from DBRead(db,"SELECT
 satfat FROM food");
 
-##### Writing to DB  
+opt from DBRead(db,"SELECT opt FROM food")
 
-// First create a result table in PHP for convenience. Then if the user choose to save his/her result we can add a statement to add into the main table. This is to prevent unecessary usage of space 
+#### Writing to DB  
 
 DBExecute(db,"create table Result(food varchar(10), quantity
 varchar(10)));
@@ -45,6 +45,7 @@ VALUES ?);
 
 #### SQL 
 
+```sql
 $id = $_REQUEST['ID']
 $foodselect = "SELECT F1, F2, F3, F4, F5, F6, F7, F8, F9 FROM user WHERE ID = '$id'"
 $conn = oci_connect('uname', 'password', 'localhost');
@@ -68,9 +69,56 @@ foreach($output as $item){
 
 exec(opl) // Execute OPL script 
 
+```
+
 #### OPL Part continued 
 
+// On Linux Machine 
 
+```bash
+unsetopt prompt_cr prompt_sp
+
+oplrun -v MODEL.mod SAMPLE-DATA.dat | grep -A 2 yAmount | cut -d "[" -f2 | cut -d "]" -f1 | sed -e 's/^[[:space:]]*//' | tr -d "\n" > optresult.txt
+```
+
+
+#### AWS DB Instance
+
+```bash
+sqlplus 'dietopteam@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=oracle-dietop1.cotfgzkq3gdm.us-west-2.rds.amazonaws.com)(PORT=1521))(CONNECT_DATA=(SID=ORCL)))'
+```
+
+#### Initialising SQL Tables 
+
+```sql
+CREATE TABLE users (
+id NUMBER(10) NOT NULL,
+name VARCHAR2(100) NOT NULL,
+age NUMBER(10) NOT NULL,
+weight NUMBER(10) NOT NULL,
+height NUMBER(10) NOT NULL,
+F1 VARCHAR2(100) NOT NULL,
+F2 VARCHAR2(100) NOT NULL,
+F3 VARCHAR2(100) NOT NULL,
+F4 VARCHAR2(100) NOT NULL,
+F5 VARCHAR2(100) NOT NULL,
+F6 VARCHAR2(100) NOT NULL,
+F7 VARCHAR2(100) NOT NULL,
+F8 VARCHAR2(100) NOT NULL,
+F9 VARCHAR2(100) NOT NULL,
+opt VARCHAR2(100) NOT NULL
+)
+
+CREATE TABLE food (
+id NUMBER(10) NOT NULL,
+foodname VARCHAR2(100) NOT NULL,
+cost FLOAT(3) NOT NULL,
+protein FLOAT(3) NOT NULL,
+fibre FLOAT(3) NOT NULL,
+omega FLOAT(3) NOT NULL,
+satfat FLOAT(3) NOT NULL
+)
+```
 
 
 
