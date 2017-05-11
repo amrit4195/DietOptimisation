@@ -78,7 +78,7 @@ exec(opl) // Execute OPL script
 ```bash
 unsetopt prompt_cr prompt_sp
 
-oplrun -v MODEL.mod SAMPLE-DATA.dat | grep -A 2 yAmount | cut -d "[" -f2 | cut -d "]" -f1 | sed -e 's/^[[:space:]]*//' | tr -d "\n" > optresult.txt
+oplrun -v MODEL.mod SAMPLE-DATA.dat | grep -A 2 yAmount | cut -d "[" -f2 | cut -d "]" -f1 | tr -d "\n" | tr -s "[[:space:]]" " " > optresult.txt
 ```
 
 
